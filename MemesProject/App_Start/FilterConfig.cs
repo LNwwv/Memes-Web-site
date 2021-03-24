@@ -8,6 +8,10 @@ namespace MemesProject
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+
+            //Uncomment to allow access only for registered users
+            //filters.Add(new AuthorizeAttribute());
+
         }
     }
 }

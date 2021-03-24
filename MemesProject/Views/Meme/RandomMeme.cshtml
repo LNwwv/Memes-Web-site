@@ -1,0 +1,29 @@
+﻿@model MemesProject.Models.MemeModel
+
+<div class="jumbotron">
+    <h2>@Model.Title</h2>
+    <img src="@Model.ImgSource" alt="img src" class="responsive">
+    <div>
+        <div class="col-lg-1">
+            Plusik @Model.Plus
+        </div>
+        <div class="col-lg-1">
+            Minusik @Model.Minus
+        </div>
+    </div>
+    <div>
+        <div class="col-lg-2">
+            Created by: @Model.CreatedBy
+        </div>
+        <div class="col-lg-2">
+            Added date: @Model.AddedDate
+        </div>
+    </div>
+</div>
+
+<style>
+    .responsive {
+        width: 100%;
+        height: auto;
+    }
+</style>

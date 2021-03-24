@@ -1,0 +1,24 @@
+﻿@model MemesProject.Models.MemeModel
+@{
+    ViewBag.Title = "CreateMeme";
+}
+<h2> Upload your meme</h2>
+
+@using (Html.BeginForm("Save", "Meme"))
+{
+    @Html.ValidationSummary(true, "Fix following errors")
+    <div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Title)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ImgSource)
+            @Html.TextBoxFor(m => m.ImgSource, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.ImgSource)
+        </div>
+        @Html.HiddenFor(m => m.Id)
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}

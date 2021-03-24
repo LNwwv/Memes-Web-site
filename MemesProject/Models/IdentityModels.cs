@@ -20,6 +20,10 @@ namespace MemesProject.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //Tables to Db
+        public DbSet<MemeModel> MemeModels { get; set; }
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

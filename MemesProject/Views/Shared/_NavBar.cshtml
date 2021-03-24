@@ -12,9 +12,9 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
-                <li>@Html.ActionLink("Dodaj mema", "Index", "Home")</li>
+                <li>@Html.ActionLink("Dodaj mema", "New", "Meme")</li>
                 <li>@Html.ActionLink("Twoje konto", "Index", "Home")</li>
-                <li>@Html.ActionLink("Losowy memik", "Index", "Home")</li>
+                <li>@Html.ActionLink("Losowy memik", "RandomMeme", "Meme")</li>
                 <li>@Html.ActionLink("Informacje", "About", "Home")</li>
             </ul>
             @Html.Partial("_LoginPartial")
