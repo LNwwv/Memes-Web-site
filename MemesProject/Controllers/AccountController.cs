@@ -73,10 +73,11 @@ namespace MemesProject.Controllers
             {
                 return View(model);
             }
+            
 
             // Nie powoduje to liczenia niepowodzeń logowania w celu zablokowania konta
             // Aby włączyć wyzwalanie blokady konta po określonej liczbie niepomyślnych prób wprowadzenia hasła, zmień ustawienie na shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -154,17 +155,17 @@ namespace MemesProject.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
-                    Email = model.Email
+                    UserName = model.UserName,
+                    Email = model.Email,
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     //Temp Code -> Dodawanie Roli
-                    ////var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    ////var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    ////await roleManager.CreateAsync(new IdentityRole(RoleName.UserRole));
-                    ////await UserManager.AddToRoleAsync(user.Id, RoleName.UserRole);
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    await roleManager.CreateAsync(new IdentityRole(RoleName.UserRole));
+                    await UserManager.AddToRoleAsync(user.Id, RoleName.UserRole);
                     //await roleManager.CreateAsync(new IdentityRole(RoleName.UserRole));
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -214,7 +215,7 @@ namespace MemesProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Nie ujawniaj informacji o tym, że użytkownik nie istnieje lub nie został potwierdzony
@@ -260,7 +261,7 @@ namespace MemesProject.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Nie ujawniaj informacji o tym, że użytkownik nie istnieje
