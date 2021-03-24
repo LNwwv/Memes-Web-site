@@ -162,11 +162,10 @@ namespace MemesProject.Controllers
                 if (result.Succeeded)
                 {
                     //Temp Code -> Dodawanie Roli
-                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    await roleManager.CreateAsync(new IdentityRole(RoleName.UserRole));
-                    await UserManager.AddToRoleAsync(user.Id, RoleName.UserRole);
-                    //await roleManager.CreateAsync(new IdentityRole(RoleName.UserRole));
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole(NAZWA_ROLI));
+                    //await UserManager.AddToRoleAsync(user.Id, NAZWA_ROLI);
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 

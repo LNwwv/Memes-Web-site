@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Http.Results;
-using System.Web.Security;
-using AutoMapper;
 using MemesProject.Models;
-
+using Microsoft.AspNet.Identity;
 
 namespace MemesProject.Controllers
 {
@@ -26,6 +20,18 @@ namespace MemesProject.Controllers
             _context.Dispose();
         }
 
+        public ActionResult Details(int id)
+        {
+            var memesInDb = _context.MemeModels.ToList().SingleOrDefault(m => m.Id == id);
+
+            if (memesInDb == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(memesInDb);
+        }
+
         public ActionResult New()
         {
             var memeModels = _context.MemeModels.ToList();
@@ -34,9 +40,9 @@ namespace MemesProject.Controllers
 
             return View("CreateMeme", viewmodel);
         }
-
-        //[HttpPost]
-        //[Authorize(Roles = RoleName.AdminRole)]
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(MemeModel memeModel)
         {
             
@@ -48,7 +54,7 @@ namespace MemesProject.Controllers
             }
             if (memeModel.Id == 0)
             {
-                memeModel.CreatedBy = "Test User";
+                memeModel.CreatedBy = User.Identity.GetUserName();
                 memeModel.Minus = 0;
                 memeModel.Plus = 0;
                 memeModel.AddedDate = DateTime.Now;
@@ -59,7 +65,7 @@ namespace MemesProject.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
+        [AllowAnonymous]
         public ActionResult RandomMeme()
         {
             //Wybiera randomowy element z tabeli MemeModels
@@ -69,5 +75,7 @@ namespace MemesProject.Controllers
 
             return View(random);
         }
+
+        
     }
 }

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Twoja aktywność</h2>
+@*<---- Div do wyśrodkowania*@
+<div class="col-lg-2"></div>
+@*//Div do wyśrodkowania --->*@
+
+<div class="container col-lg-12">
+    <div class="jumbotron col-lg-10">
+        <dl class="dl-horizontal">
+            <dt>Wyświetl swoje publikowane memy: </dt>
+            <dd>@Html.ActionLink("Klik", "ShowMyMemes")</dd>
+            <dt>Ile osób łącznie polubiło twoje posty:  </dt>
+            <dd></dd>
+            <dt>Wyświetl swoje publikowane memy: </dt>
+            <dd>@Html.ActionLink("Klik", "ShowMyMemes")</dd>
+        </dl>
+</div>
+    @*<div class="jumbotron col-lg-2">
+
+    </div>*@
+</div>
+
+<style>
+    .responsive {
+        width: 100%;
+        height: auto;
+    }
+</style>

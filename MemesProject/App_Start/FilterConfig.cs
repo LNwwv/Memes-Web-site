@@ -10,7 +10,7 @@ namespace MemesProject
             filters.Add(new HandleErrorAttribute());
 
             //Uncomment to allow access only for registered users
-            //filters.Add(new AuthorizeAttribute());
+            filters.Add(new AuthorizeAttribute());
 
         }
     }

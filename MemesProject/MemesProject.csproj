@@ -185,6 +185,7 @@
     <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\MappingProfile.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\MemeController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -284,6 +285,9 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Meme\CreateMeme.cshtml" />
     <Content Include="Views\Meme\RandomMeme.cshtml" />
+    <Content Include="Views\User\ShowMyMemes.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Meme\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

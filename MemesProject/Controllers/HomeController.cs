@@ -8,6 +8,7 @@ using MemesProject.Models;
 
 namespace MemesProject.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private ApplicationDbContext _context;

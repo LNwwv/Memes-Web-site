@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<MemesProject.Models.MemeModel>
-
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "MyMemes";
 }
 @if (!Model.Any())
 {
@@ -12,14 +11,14 @@ else
     foreach (var meme in Model)
     {
         // <---- Div do wyśrodkowania
-        <div class="col-lg-2"></div> 
+        <div class="col-lg-2"></div>
         //Div do wyśrodkowania --->
 
 
-        <div class="jumbotron col-lg-9">
-            <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
+        <div class="jumbotron col-lg-9 d-flex p-2 ">
+            <h2>@meme.Title</h2>
             <img src="@meme.ImgSource" alt="img src" class="responsive">
-            <br/>
+            <br />
             <div>
                 <div class="col-lg-2">
                     Plusik @meme.Plus
@@ -45,6 +44,5 @@ else
         width: 100%;
         height: auto;
     }
-    
 </style>
 
