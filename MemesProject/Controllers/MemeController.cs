@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoMapper.Mappers;
 using MemesProject.Models;
+using MemesProject.ViewModels;
 using Microsoft.AspNet.Identity;
+using PusherServer;
 
 namespace MemesProject.Controllers
 {
@@ -19,7 +23,7 @@ namespace MemesProject.Controllers
         {
             _context.Dispose();
         }
-
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             var memesInDb = _context.MemeModels.ToList().SingleOrDefault(m => m.Id == id);
@@ -34,24 +38,22 @@ namespace MemesProject.Controllers
 
         public ActionResult New()
         {
-            var memeModels = _context.MemeModels.ToList();
-
             var viewmodel = new MemeModel();
 
             return View("CreateMeme", viewmodel);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(MemeModel memeModel)
         {
-            
             if (!ModelState.IsValid)
             {
                 var viewModel = new MemeModel();
-                
+
                 return View("CreateMeme", viewModel);
             }
+
             if (memeModel.Id == 0)
             {
                 memeModel.CreatedBy = User.Identity.GetUserName();
@@ -65,10 +67,13 @@ namespace MemesProject.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+
+        //Wybiera randomowy element z tabeli MemeModels
         [AllowAnonymous]
         public ActionResult RandomMeme()
         {
-            //Wybiera randomowy element z tabeli MemeModels
+            
             var random = _context.MemeModels
                 .OrderBy(c => Guid.NewGuid())
                 .FirstOrDefault();
@@ -76,6 +81,26 @@ namespace MemesProject.Controllers
             return View(random);
         }
 
-        
+        //Sekcja komentarzy
+        public ActionResult Comments(int? id)
+        {
+            var comments = _context.Comments.Where(x => x.MemeId == id).ToArray();
+            return Json(comments, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Comment(Comments data)
+        {
+            _context.Comments.Add(data);
+            _context.SaveChanges();
+            var options = new PusherOptions();
+            options.Cluster = "XXX_APP_CLUSTER";
+            var pusher = new Pusher("XXX_APP_ID", "XXX_APP_KEY", "XXX_APP_SECRET", options);
+            ITriggerResult result = await pusher.TriggerAsync("asp_channel", "asp_event", data);
+            return Content("ok");
+        }
+
+
+
+
     }
 }

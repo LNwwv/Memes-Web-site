@@ -1,8 +1,11 @@
-﻿@model IEnumerable<MemesProject.Models.MemeModel>
+﻿
+@model  PagedList.IPagedList<MemesProject.Models.MemeModel>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Home Page";
 }
+<br />
 @if (!Model.Any())
 {
     <p>We don't have any memes yet.</p>
@@ -12,17 +15,17 @@ else
     foreach (var meme in Model)
     {
         // <---- Div do wyśrodkowania
-        <div class="col-lg-2"></div> 
+        <div class="col-lg-2"></div>
         //Div do wyśrodkowania --->
 
 
         <div class="jumbotron col-lg-9">
             <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
             <img src="@meme.ImgSource" alt="img src" class="responsive">
-            <br/>
+            <br />
             <div>
                 <div class="col-lg-2">
-                    Plusik @meme.Plus
+                    @meme.Plus
                 </div>
                 <div class="col-lg-2">
                     Minusik @meme.Minus
@@ -36,15 +39,25 @@ else
                     Added date: @meme.AddedDate
                 </div>
             </div>
+
         </div>
     }
 }
+<br />
+@*<---- Div do wyśrodkowania*@
+<div class="col-lg-2"></div>
+@*Div do wyśrodkowania --->*@
+<div class="col-lg-10">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
 
 <style>
     .responsive {
         width: 100%;
         height: auto;
     }
-    
 </style>
 

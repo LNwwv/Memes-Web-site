@@ -16,7 +16,7 @@ else
 
 
         <div class="jumbotron col-lg-9 d-flex p-2 ">
-            <h2>@meme.Title</h2>
+            <h2>@Html.ActionLink(@meme.Title,"Details","Meme", new { id = meme.Id }, null)</h2>
             <img src="@meme.ImgSource" alt="img src" class="responsive">
             <br />
             <div>
@@ -34,9 +34,36 @@ else
                 <div class="col-lg-3">
                     Added date: @meme.AddedDate
                 </div>
+                @if (User.Identity.Name == meme.CreatedBy)
+                {
+                    <div class="col-lg-2">
+                        <button data-id="@meme.Id" class="btn btn-danger delete">Delete</button>
+                    </div>
+                }
             </div>
         </div>
     }
+}
+@section scripts
+{
+    <script>
+        $(function () {
+            $('.delete').click(function () {
+                $.ajax({
+                        method: "DELETE",
+                        url: "/api/Memes/" + $(this).data("id")
+                    })
+                    .done(function (response) {
+                        window.location.reload();
+                    })
+                    .fail(function (response) {
+                        alert("Error");
+                    });
+            });
+        })
+    </script>
+
+
 }
 
 <style>

@@ -1,4 +1,7 @@
 ﻿@model MemesProject.Models.MemeModel
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+<script src="//js.pusher.com/4.0/pusher.min.js"></script>
 
 
 @*<---- Div do wyśrodkowania*@
@@ -6,31 +9,142 @@
 @*//Div do wyśrodkowania --->*@
 
 
-<div class="jumbotron col-lg-9 d-flex p-2 ">
-    <h2>@Model.Title</h2>
-    <img src="@Model.ImgSource" alt="img src" class="responsive">
-    <br />
-    <div>
-        <div class="col-lg-2">
-            Plusik @Model.Plus
-        </div>
-        <div class="col-lg-2">
-            Minusik @Model.Minus
+<h2>Details</h2>
+<div id="app">
+    <div class="jumbotron col-lg-9">
+        <div>
+            <h2>@Model.Title</h2>
+            <img src="@Model.ImgSource" alt="img src" class="responsive">
+            <br/>
+            <div>
+                <div class="col-lg-2">
+                    @Model.Plus
+                </div>
+                <div class="col-lg-2">
+                    Minusik @Model.Minus
+                </div>
+            </div>
+            <div>
+                <div class="col-lg-3">
+                    Created by: @Model.CreatedBy
+                </div>
+                <div class="col-lg-3">
+                    Added date: @Model.AddedDate
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        <div class="col-lg-3">
-            Created by:  @Model.CreatedBy
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="page-header">
+                        <h1><small class="pull-right">{{comments.length}} komentarzy</small> Komentarze </h1>
+                    </div>
+                    <div class="comments-list">
+                        <div class="media" v-for="com in comments">
+                            <div class="media-body">
+                                <h4 class="media-heading UserId">{{com.UserId}}</h4>
+                                {{com.Body}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            Added date:  @Model.AddedDate
+
+        <div class="container">
+            <br/>
+            <p>Your Comment</p>
+            <form onsubmit="return false;">
+
+                <input type="hidden" id="UserId" v-model="comment.UserId" class="form-control"/>
+                <br/>
+                <textarea rows="3" placeholder="Your Comment" id="Body" v-model="comment.Body" class="form-control"></textarea>
+                <br/>
+                <button class="btn btn-success" v-on:click="submit_comment()" onclick="window.location.reload();">Save</button>
+
+            </form>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-8 alert alert-danger" role="alert">
+
+                Sekcja komentarzy dostępna tylko dla zalogowanych użytkowników.
+            </div>
+        </div>
+    }
 </div>
+<p>
+    @Html.ActionLink("Wróc na stronę główną", "Index", "Home")
+</p>
+
+<script>
+    var pusher = new Pusher('XXX_APP_KEY',
+        {
+            cluster: 'XXX_APP_CLUSTER'
+        });
+    var my_channel = pusher.subscribe('asp_channel');
+    var app = new Vue({
+        el: '#app',
+        data: {
+            comments: [],
+            comment: {
+                UserId: '@User.Identity.Name',
+                Body: '',
+                MemeId: @Model.Id
+            }
+        },
+        created: function() {
+            this.get_comments();
+            this.listen();
+        },
+        methods: {
+            get_comments: function() {
+                axios.get('@Url.Action("Comments", "Meme", new {id = @Model.Id}, protocol: Request.Url.Scheme)')
+                    .then((response) => {
+
+                        this.comments = response.data;
+
+                    });
+
+            },
+            listen: function() {
+                my_channel.bind("asp_event",
+                    (data) => {
+                        if (data.MemeId == this.comment.MemeId) {
+                            this.comments.push(data);
+                        }
+
+                    })
+            },
+            submit_comment: function() {
+                axios.post('@Url.Action("Comment", "Meme", new {}, protocol: Request.Url.Scheme)', this.comment)
+                    .then((response) => {
+                        this.comment.UserId = '@User.Identity.Name';
+                        this.comment.Body = '';
+                        alert("Comment Submitted");
+
+                    });
+            }
+        }
+    });
+</script>
+
 
 <style>
     .responsive {
         width: 100%;
         height: auto;
     }
+
+    .UserId {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .comments-list .media { border-bottom: 1px dotted #ccc; }
 </style>

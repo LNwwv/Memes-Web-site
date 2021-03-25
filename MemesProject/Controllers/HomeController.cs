@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MemesProject.Models;
+using PagedList;
 
 namespace MemesProject.Controllers
 {
@@ -23,10 +24,26 @@ namespace MemesProject.Controllers
             _context.Dispose();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var memesInDb = _context.MemeModels.ToList();
-            return View(memesInDb);
+        
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(memesInDb.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult About()
