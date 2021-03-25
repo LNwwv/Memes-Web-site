@@ -25,6 +25,7 @@ namespace MemesProject.Models
         //Tables to Db
         public DbSet<MemeModel> MemeModels { get; set; }
         public DbSet<Comments> Comments { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
 
         public ApplicationDbContext()

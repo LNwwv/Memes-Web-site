@@ -1,4 +1,4 @@
-﻿@model MemesProject.Models.MemeModel
+﻿@model MemesProject.ViewModels.MemeViewModel
 @{
     ViewBag.Title = "CreateMeme";
 }
@@ -9,16 +9,21 @@
     @Html.ValidationSummary(true, "Fix following errors")
     <div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Title)
-            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Title)
+            @Html.LabelFor(m => m.MemeModel.Title)
+            @Html.TextBoxFor(m => m.MemeModel.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.MemeModel.Title)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.ImgSource)
-            @Html.TextBoxFor(m => m.ImgSource, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.ImgSource)
+            @Html.LabelFor(m => m.MemeModel.CategoryId)
+            @Html.DropDownListFor(m => m.MemeModel.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select meme category", new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.MemeModel.CategoryId)
         </div>
-        @Html.HiddenFor(m => m.Id)
+        <div class="form-group">
+            @Html.LabelFor(m => m.MemeModel.ImgSource)
+            @Html.TextBoxFor(m => m.MemeModel.ImgSource, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.MemeModel.ImgSource)
+        </div>
+        @Html.HiddenFor(m => m.MemeModel.Id)
     </div>
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>

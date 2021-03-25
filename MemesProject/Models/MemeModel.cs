@@ -24,6 +24,9 @@ namespace MemesProject.Models
         public string CreatedBy { get; set; }
         public DateTime? AddedDate { get; set; }
 
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
+
         
 }
 }

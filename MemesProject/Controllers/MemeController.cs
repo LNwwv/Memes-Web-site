@@ -38,9 +38,13 @@ namespace MemesProject.Controllers
 
         public ActionResult New()
         {
-            var viewmodel = new MemeModel();
+            var viewModel = new MemeViewModel()
+            {
+                MemeModel = new MemeModel(),
+                Categories = _context.Categories.ToList()
+            };
 
-            return View("CreateMeme", viewmodel);
+            return View("CreateMeme", viewModel);
         }
 
         [HttpPost]
@@ -49,7 +53,11 @@ namespace MemesProject.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new MemeModel();
+                var viewModel = new MemeViewModel()
+                {
+                    MemeModel = memeModel,
+                    Categories = _context.Categories.ToList()
+                };
 
                 return View("CreateMeme", viewModel);
             }
