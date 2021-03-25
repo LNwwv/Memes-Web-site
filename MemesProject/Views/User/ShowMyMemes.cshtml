@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MemesProject.Models.MemeModel>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList < MemesProject.Models.MemeModel>
 @{
     ViewBag.Title = "MyMemes";
 }
@@ -16,7 +17,7 @@ else
 
 
         <div class="jumbotron col-lg-9 d-flex p-2 ">
-            <h2>@Html.ActionLink(@meme.Title,"Details","Meme", new { id = meme.Id }, null)</h2>
+            <h2>@Html.ActionLink(@meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
             <img src="@meme.ImgSource" alt="img src" class="responsive">
             <br />
             <div>
@@ -44,15 +45,24 @@ else
         </div>
     }
 }
+@*<---- Div do wyśrodkowania*@
+<div class="col-lg-2"></div>
+@*Div do wyśrodkowania --->*@
+<div class="col-lg-10">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("ShowMyMemes",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
 @section scripts
 {
     <script>
         $(function () {
             $('.delete').click(function () {
                 $.ajax({
-                        method: "DELETE",
-                        url: "/api/Memes/" + $(this).data("id")
-                    })
+                    method: "DELETE",
+                    url: "/api/Memes/" + $(this).data("id")
+                })
                     .done(function (response) {
                         window.location.reload();
                     })

@@ -1,4 +1,5 @@
-﻿@model MemesProject.Models.MemeModel
+﻿@model  PagedList.IPagedList<MemesProject.Models.MemeModel>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,14 +13,17 @@
 <div class="container col-lg-12">
     <div class="jumbotron col-lg-4">
         <dl class="dl-horizontal">
+            <dt>Liczba wrzuconych memów</dt>
+            <dd>@ViewBag.SumOfMemes</dd>
+            <hr />
             <dt>Wyświetl swoje publikowane memy: </dt>
             <dd>@Html.ActionLink("Klik", "ShowMyMemes")</dd>
-
-            <dt>Ile osób łącznie polubiło twoje posty</dt>
+            <hr />
+            <dt>Ile osób łącznie skomentowało twoje posty</dt>
+            <dd>@ViewBag.SumOfComentary</dd>
+            <hr />
+            <dt>Ile osób łącznie polubiło twoje posty </dt>
             <dd>@ViewBag.SumOfLikes</dd>
-
-            <dt>Ile osób łącznie nie lubi twoich postów </dt>
-            <dd>@ViewBag.SumOfMinus</dd>
         </dl>
     </div>
     <div class="jumbotron col-lg-6">
@@ -27,10 +31,11 @@
             <dt>Twoje ostatnie komentarze: </dt>
             <dd></dd>
 
-            
+
         </dl>
     </div>
 </div>
+
 
 <style>
     .responsive {
