@@ -195,7 +195,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
@@ -252,6 +251,14 @@
     <Compile Include="Migrations\202103261253334_DeleteMinusSection.designer.cs">
       <DependentUpon>202103261253334_DeleteMinusSection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103261626404_EnterMemesToDb.cs" />
+    <Compile Include="Migrations\202103261626404_EnterMemesToDb.designer.cs">
+      <DependentUpon>202103261626404_EnterMemesToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103261630367_addCategoriesValuetoDb.cs" />
+    <Compile Include="Migrations\202103261630367_addCategoriesValuetoDb.designer.cs">
+      <DependentUpon>202103261630367_addCategoriesValuetoDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -289,9 +296,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <None Include="Properties\PublishProfiles\Appka.pubxml" />
-    <None Include="Properties\PublishProfiles\AppkaTesting.pubxml" />
-    <None Include="Properties\PublishProfiles\MemesProjec - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -343,12 +347,14 @@
     <Content Include="Views\Meme\Details.cshtml" />
     <Content Include="ToDo" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Meme\Category.cshtml" />
     <None Include="Web.Testing.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -393,6 +399,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103261253334_DeleteMinusSection.resx">
       <DependentUpon>202103261253334_DeleteMinusSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103261626404_EnterMemesToDb.resx">
+      <DependentUpon>202103261626404_EnterMemesToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103261630367_addCategoriesValuetoDb.resx">
+      <DependentUpon>202103261630367_addCategoriesValuetoDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

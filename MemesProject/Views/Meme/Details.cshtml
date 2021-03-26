@@ -25,14 +25,16 @@
             {
                 @* Like container to registered User *@
                 <div class="col-lg-2 container">
-                    @Model.Plus @Html.ActionLink("Like", "Like", "Home", new {id = Model.Id}, null)
+                    <a href="@Url.Action("Like", "Home", new {id = Model.Id}, null)" class="fa fa-lg fa-thumbs-o-up "></a>
+                    @Model.Plus
                 </div>
             }
             else
             {
                 @* Like container to unregistered User *@
                 <div class="col-lg-2 container">
-                    @Model.Plus @Html.ActionLink("Like", "Register", "Account", new {id = Model.Id}, null)
+                    <a href="@Url.Action("Like", "Home", new {id = Model.Id}, null)" class="fa fa-lg fa-thumbs-o-up "></a>
+                    @Model.Plus
                 </div>
             }
 
@@ -41,7 +43,7 @@
         @* Created by and Date*@
         <div>
             <div class="col-lg-3">
-                by: <strong>@Model.CreatedBy</strong>
+                <i class="fa fa-lg fa-cloud-upload"> </i> by: <strong>@Model.CreatedBy</strong>
             </div>
             <div class="col-lg-6">
 

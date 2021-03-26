@@ -1,9 +1,26 @@
-﻿@using PagedList.Mvc
-@model PagedList.IPagedList < MemesProject.Models.MemeModel>
+﻿@using MemesProject.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<MemesProject.Models.MemeModel>
 @{
     ViewBag.Title = "MyMemes";
 }
-<br/>
+<br />
+<div class="container">
+    <br />
+    <br />
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-4">
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <div class="col-lg-5" id="obokStrony">
+
+    </div>
+</div>
 @if (!Model.Any())
 {
     <p>We don't have any memes yet.</p>
@@ -13,28 +30,31 @@ else
     foreach (var meme in Model)
     {
         // <---- Div do wyśrodkowania
-        <div class="col-lg-2"></div>
+        <div class="col-lg-3"></div>
         //Div do wyśrodkowania --->
 
-
-        <div class="jumbotron col-lg-9 d-flex p-2 ">
-            <h2>@Html.ActionLink(@meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
+        @* meme view *@
+        <div class="jumbotron col-lg-7">
+            <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
+            <hr />
             <img src="@meme.ImgSource" alt="img src" class="responsive">
             <br />
+            <hr />
+
+            @* Comment and Like *@
             <div>
-                <div class="col-lg-2">
-                    Like @meme.Plus
-                </div>
-                <div class="col-lg-2">
-                    Minusik @meme.Minus
-                </div>
+                @* If wyswietlajacy panel pod memem zalezny od przydzielonej roli aktualnie zalogowanego usera. *@
+
             </div>
+
+            @* Created by and Date value*@
             <div>
                 <div class="col-lg-3">
-                    Created by: @meme.CreatedBy
+                    <i class="fa fa-lg fa-cloud-upload"> </i>  by: <strong>@meme.CreatedBy</strong>
                 </div>
-                <div class="col-lg-3">
-                    Added date:  @Html.ValueFor(m => meme.AddedDate, "{0:dd/MM/yyyy}")
+                <div class="col-lg-5">
+
+                    <i class="fa fa-calendar"></i>Added date:<strong> @Html.ValueFor(m => meme.AddedDate, "{0:dd/MM/yyyy}")</strong>
                 </div>
                 @if (User.Identity.Name == meme.CreatedBy)
                 {
@@ -42,14 +62,16 @@ else
                         <button data-id="@meme.Id" class="btn btn-danger delete">Delete</button>
                     </div>
                 }
+
             </div>
+
         </div>
     }
 }
 @*<---- Div do wyśrodkowania*@
-<div class="col-lg-2"></div>
+<div class="col-lg-3"></div>
 @*Div do wyśrodkowania --->*@
-<div class="col-lg-10">
+<div class="col-lg-7">
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("ShowMyMemes",
@@ -73,8 +95,6 @@ else
             });
         })
     </script>
-
-
 }
 
 <style>
@@ -83,4 +103,5 @@ else
         height: auto;
     }
 </style>
+
 

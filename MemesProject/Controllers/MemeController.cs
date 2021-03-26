@@ -107,6 +107,14 @@ namespace MemesProject.Controllers
             return Content("ok");
         }
 
+        public ActionResult Category(int id)
+        {
+            var categoryMem = _context.Categories.ToList().SingleOrDefault(m => m.Id == id);
+
+
+
+            return View();
+        }
         
 
 

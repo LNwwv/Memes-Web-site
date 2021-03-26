@@ -26,22 +26,22 @@ namespace MemesProject.Controllers
             _context.Dispose();
         }
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string currentFilter , int? page)
         {
-            ViewBag.CurrentSort = sortOrder;
+            //ViewBag.CurrentSort = sortOrder;
 
             ViewBag.Comments = _context.Comments.ToList().Count;
 
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
+            //if (searchString != null)
+            //{
+            //    page = 1;
+            //}
+            //else
+            //{
+            //    searchString = currentFilter;
+            //}
 
-            ViewBag.CurrentFilter = searchString;
+            //ViewBag.CurrentFilter = searchString;
 
             var memesInDb = _context.MemeModels.ToList();
             
