@@ -1,5 +1,6 @@
 ﻿
 @model  PagedList.IPagedList<MemesProject.Models.MemeModel>
+@using MemesProject.Models
 @using PagedList.Mvc;
 
 @{
@@ -21,23 +22,23 @@ else
 
         <div class="jumbotron col-lg-9">
             <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
+            
             <img src="@meme.ImgSource" alt="img src" class="responsive">
             <br />
             <div>
-                <div class="col-lg-2">
-                    @meme.Plus
+                <div class="col-lg-2 container">
+                    <div class="col-lg-6">@meme.Plus</div>
+                    <div class="col-lg-6">@Html.ActionLink("Like", "Like", new { id = meme.Id })</div>
                 </div>
-                <div class="col-lg-2">
-                    Minusik @meme.Minus
-                </div>
+                
             </div>
             <div>
                 <div class="col-lg-3">
-                    Created by: @meme.CreatedBy
+                    Created by: <strong>@meme.CreatedBy</strong>
                 </div>
-                <div class="col-lg-3">
-                    Added date: @meme.AddedDate
-                </div>
+                <div class="col-lg-5">
+                    Added date:<strong> @meme.AddedDate</strong>
+</div>
             </div>
 
         </div>

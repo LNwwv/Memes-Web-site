@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "MyMemes";
 }
+<br/>
 @if (!Model.Any())
 {
     <p>We don't have any memes yet.</p>
@@ -22,7 +23,7 @@ else
             <br />
             <div>
                 <div class="col-lg-2">
-                    Plusik @meme.Plus
+                    Like @meme.Plus
                 </div>
                 <div class="col-lg-2">
                     Minusik @meme.Minus

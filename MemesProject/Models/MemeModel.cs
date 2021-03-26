@@ -17,7 +17,7 @@ namespace MemesProject.Models
         [Display(Name = "Meme URL source")]
         [Required(ErrorMessage = "Please enter URL source")]
         public string ImgSource { get; set; }
-
+        [Range(0, 9999)]
         public int Plus { get; set; }
         public int Minus { get; set; }
         
@@ -26,7 +26,6 @@ namespace MemesProject.Models
 
         public Category Category { get; set; }
         public int CategoryId { get; set; }
-
-        
-}
+       
+    }
 }

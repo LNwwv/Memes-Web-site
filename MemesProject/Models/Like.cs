@@ -5,12 +5,11 @@ using System.Web;
 
 namespace MemesProject.Models
 {
-    public class Likes
+    public class Like
     {
         public int Id { get; set; }
-        public string UserID { get; set; }
         public int MemeId { get; set; }
-        public int LikeCount { get; set; }
-        public int DislikeCount { get; set; }
+        public string UserId { get; set; }
     }
 }
+

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MemesProject.Models;
+using Microsoft.AspNet.Identity;
 using PagedList;
 
 namespace MemesProject.Controllers
@@ -16,9 +18,9 @@ namespace MemesProject.Controllers
 
         public HomeController()
         {
-        _context = new ApplicationDbContext();
-
+            _context = new ApplicationDbContext();
         }
+
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
@@ -40,24 +42,50 @@ namespace MemesProject.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var memesInDb = _context.MemeModels.ToList();
-        
+
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(memesInDb.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult About()
+        public ActionResult Like(int id)
         {
-            ViewBag.Message = "Your application description page.";
+            var user = User.Identity.GetUserId();
 
-            return View();
+            var memeModel =_context.MemeModels.ToList().Find(m => m.Id == id);
+
+            var like = new Like
+            {
+                MemeId = id,
+                UserId = user
+            };
+            
+            var order =  _context.Likes.Where(x => x.UserId == user && x.MemeId == id).FirstOrDefault();
+            if (order != null)
+            {
+                var likeToDelete =  _context.Likes.ToList().Find(m => m.UserId == user);
+                _context.Likes.Remove(likeToDelete);
+                memeModel.Plus -= 1;
+            }
+            else
+            {
+                _context.Likes.Add(like);
+                memeModel.Plus += 1;
+            }
+
+
+            _context.SaveChanges();
+            
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Contact()
+        public ActionResult Unlike(int id)
         {
-            ViewBag.Message = "Your contact page.";
+            var update = _context.MemeModels.ToList().Find(m => m.Id == id);
+            update.Minus--;
 
-            return View();
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
