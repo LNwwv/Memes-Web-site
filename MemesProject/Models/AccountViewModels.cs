@@ -8,6 +8,9 @@ namespace MemesProject.Models
         [Required]
         [Display(Name = "Adres e-mail")]
         public string Email { get; set; }
+        [Required]
+        [Display(Name = "Nazwa użytkownika")]
+        public string UserName { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -49,7 +52,7 @@ namespace MemesProject.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Nazwa użytkownika")]
         public string UserName { get; set; }
 
         [Required]
@@ -64,7 +67,7 @@ namespace MemesProject.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Nazwa użytkownika")]
         public string UserName { get; set; }
 
         [Required]

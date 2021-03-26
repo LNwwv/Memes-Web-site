@@ -161,7 +161,8 @@ namespace MemesProject.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //Temp Code -> Dodawanie Roli
+                    // Dodawanie Roli, wymaga stworzenie nowego zarejestrowanego usera aby przypisac go do danej roli
+
                     //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
                     //await roleManager.CreateAsync(new IdentityRole(NAZWA_ROLI));
@@ -379,7 +380,7 @@ namespace MemesProject.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

@@ -9,8 +9,11 @@ namespace MemesProject
         {
             filters.Add(new HandleErrorAttribute());
 
-            //Uncomment to allow access only for registered users
+            //Odpowiada za dostęp jedynie dla zalogowanych
             filters.Add(new AuthorizeAttribute());
+
+            //Wyłącza adres strony bez SSL
+            filters.Add(new RequireHttpsAttribute());
 
         }
     }

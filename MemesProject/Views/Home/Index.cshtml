@@ -1,14 +1,15 @@
-﻿
-@model  PagedList.IPagedList<MemesProject.Models.MemeModel>
+﻿@model  PagedList.IPagedList<MemesProject.Models.MemeModel>
 @using MemesProject.Models
 @using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Home Page";
 }
-<br />
+
+@* Generator widoku *@
 @if (!Model.Any())
 {
+    <br/>
     <p>We don't have any memes yet.</p>
 }
 else
@@ -16,43 +17,63 @@ else
     foreach (var meme in Model)
     {
         // <---- Div do wyśrodkowania
-        <div class="col-lg-2"></div>
+        <div class="col-lg-3"></div>
         //Div do wyśrodkowania --->
 
-
-        <div class="jumbotron col-lg-9">
-            <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
-            
+        @* meme view *@
+        <div class="jumbotron col-lg-7">
+            <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new {id = meme.Id}, null)</h2>
+            <hr/>
             <img src="@meme.ImgSource" alt="img src" class="responsive">
-            <br />
+            <br/>
+            <hr/>
+
+            @* Comment and Like *@
             <div>
-                <div class="col-lg-2 container">
-                    <div class="col-lg-6">@meme.Plus</div>
-                    <div class="col-lg-6">@Html.ActionLink("Like", "Like", new { id = meme.Id })</div>
-                </div>
-                
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @* Like container to registered User *@
+                    <div class="col-lg-2 container">
+                        @meme.Plus @Html.ActionLink("Like", "Like", new {id = meme.Id})
+                    </div>
+                }
+                else
+                {
+                    @* Like container to unregistered User *@
+                    <div class="col-lg-2 container">
+                        @meme.Plus @Html.ActionLink("Like", "Register", "Account", new {id = meme.Id}, null)
+                    </div>
+                }
+
             </div>
+
+            @* Created by and Date*@
             <div>
                 <div class="col-lg-3">
-                    Created by: <strong>@meme.CreatedBy</strong>
+                    by: <strong>@meme.CreatedBy</strong>
                 </div>
-                <div class="col-lg-5">
-                    Added date:<strong> @meme.AddedDate</strong>
-</div>
+                <div class="col-lg-6">
+
+                    Added date:<strong> @Html.ValueFor(m => meme.AddedDate, "{0:dd/MM/yyyy}")</strong>
+                </div>
             </div>
 
         </div>
     }
 }
-<br />
+<br/>
+
+
 @*<---- Div do wyśrodkowania*@
-<div class="col-lg-2"></div>
+<div class="col-lg-3"></div>
 @*Div do wyśrodkowania --->*@
-<div class="col-lg-10">
+
+
+<div class="col-lg-7">
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
 </div>
 
 <style>
@@ -61,4 +82,3 @@ else
         height: auto;
     }
 </style>
-

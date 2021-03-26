@@ -23,6 +23,7 @@ namespace MemesProject.Controllers
         {
             _context.Dispose();
         }
+
         [AllowAnonymous]
         public ActionResult Details(int id)
         {
@@ -76,7 +77,6 @@ namespace MemesProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
         //Wybiera randomowy element z tabeli MemeModels
         [AllowAnonymous]
         public ActionResult RandomMeme()
@@ -95,6 +95,7 @@ namespace MemesProject.Controllers
             var comments = _context.Comments.Where(x => x.MemeId == id).ToArray();
             return Json(comments, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public async Task<ActionResult> Comment(Comments data)
         {

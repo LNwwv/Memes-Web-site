@@ -34,7 +34,7 @@ else
                     Created by: @meme.CreatedBy
                 </div>
                 <div class="col-lg-3">
-                    Added date: @meme.AddedDate
+                    Added date:  @Html.ValueFor(m => meme.AddedDate, "{0:dd/MM/yyyy}")
                 </div>
                 @if (User.Identity.Name == meme.CreatedBy)
                 {

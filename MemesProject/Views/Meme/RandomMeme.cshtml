@@ -6,26 +6,43 @@
 @*//Div do wyśrodkowania --->*@
 
 
-<div class="jumbotron col-lg-9">
-    <h2>@Model.Title</h2>
+<div class="jumbotron col-lg-7">
+    <h2>@Html.ActionLink(Model.Title, "Details", "Meme", new {id = Model.Id}, null)</h2>
+    <hr/>
     <img src="@Model.ImgSource" alt="img src" class="responsive">
     <br/>
+    <hr/>
+
+    @* Comment and Like *@
     <div>
-        <div class="col-lg-2">
-            Plusik @Model.Plus
-        </div>
-        <div class="col-lg-2">
-            Minusik @Model.Minus
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+                @* Like container to registered User *@
+            <div class="col-lg-2 container">
+                @Model.Plus @Html.ActionLink("Like", "Like", "Home", new {id = Model.Id}, null)
+            </div>
+        }
+        else
+        {
+                @* Like container to unregistered User *@
+            <div class="col-lg-2 container">
+                @Model.Plus @Html.ActionLink("Like", "Login", "Account", new {id = Model.Id}, null)
+            </div>
+        }
+
     </div>
+
+    @* Created by and Date*@
     <div>
         <div class="col-lg-3">
-            Created by:  @Model.CreatedBy
+            by: <strong>@Model.CreatedBy</strong>
         </div>
-        <div class="col-lg-3">
-            Added date:  @Model.AddedDate
+        <div class="col-lg-6">
+
+            Added date:<strong> @Html.ValueFor(m => Model.AddedDate, "{0:dd/MM/yyyy}")</strong>
         </div>
     </div>
+
 </div>
 
 <style>

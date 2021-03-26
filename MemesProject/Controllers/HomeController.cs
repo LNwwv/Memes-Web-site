@@ -30,6 +30,8 @@ namespace MemesProject.Controllers
         {
             ViewBag.CurrentSort = sortOrder;
 
+            ViewBag.Comments = _context.Comments.ToList().Count;
+
             if (searchString != null)
             {
                 page = 1;
@@ -42,49 +44,47 @@ namespace MemesProject.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var memesInDb = _context.MemeModels.ToList();
+            
+            // pageSize odpowiada za liczbe elementow widocznych na jednej stronie.
 
-            int pageSize = 5;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
+
             return View(memesInDb.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult About()
+        {
+            return View();
         }
 
         public ActionResult Like(int id)
         {
-            var user = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
 
-            var memeModel =_context.MemeModels.ToList().Find(m => m.Id == id);
+            var memeInDb =_context.MemeModels.ToList().Find(m => m.Id == id);
 
-            var like = new Like
+            var likeToDb = new Like
             {
                 MemeId = id,
-                UserId = user
+                UserId = userId
             };
             
-            var order =  _context.Likes.Where(x => x.UserId == user && x.MemeId == id).FirstOrDefault();
+            var order =  _context.Likes.FirstOrDefault(x => x.UserId == userId && x.MemeId == id);
             if (order != null)
             {
-                var likeToDelete =  _context.Likes.ToList().Find(m => m.UserId == user);
+                var likeToDelete =  _context.Likes.ToList().Find(m => m.UserId == userId);
                 _context.Likes.Remove(likeToDelete);
-                memeModel.Plus -= 1;
+                memeInDb.Plus -= 1;
             }
             else
             {
-                _context.Likes.Add(like);
-                memeModel.Plus += 1;
+                _context.Likes.Add(likeToDb);
+                memeInDb.Plus += 1;
             }
-
 
             _context.SaveChanges();
             
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Unlike(int id)
-        {
-            var update = _context.MemeModels.ToList().Find(m => m.Id == id);
-            update.Minus--;
-
-            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }
