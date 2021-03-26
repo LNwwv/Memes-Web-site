@@ -5,11 +5,18 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<div class="col-lg-7">
+    <br/>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+</div>
 
 @* Generator widoku *@
 @if (!Model.Any())
 {
-    <br/>
+    <br />
     <p>We don't have any memes yet.</p>
 }
 else
@@ -22,11 +29,11 @@ else
 
         @* meme view *@
         <div class="jumbotron col-lg-7">
-            <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new {id = meme.Id}, null)</h2>
-            <hr/>
+            <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
+            <hr />
             <img src="@meme.ImgSource" alt="img src" class="responsive">
-            <br/>
-            <hr/>
+            <br />
+            <hr />
 
             @* Comment and Like *@
             <div>
@@ -34,14 +41,14 @@ else
                 {
                     @* Like container to registered User *@
                     <div class="col-lg-2 container">
-                        @meme.Plus @Html.ActionLink("Like", "Like", new {id = meme.Id})
+                        @meme.Plus @Html.ActionLink("Like", "Like", new { id = meme.Id })
                     </div>
                 }
                 else
                 {
                     @* Like container to unregistered User *@
                     <div class="col-lg-2 container">
-                        @meme.Plus @Html.ActionLink("Like", "Register", "Account", new {id = meme.Id}, null)
+                        @meme.Plus @Html.ActionLink("Like", "Register", "Account", new { id = meme.Id }, null)
                     </div>
                 }
 
@@ -61,7 +68,7 @@ else
         </div>
     }
 }
-<br/>
+<br />
 
 
 @*<---- Div do wyśrodkowania*@
@@ -73,7 +80,7 @@ else
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("Index",
-        new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 </div>
 
 <style>

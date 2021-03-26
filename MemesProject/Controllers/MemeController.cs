@@ -66,7 +66,6 @@ namespace MemesProject.Controllers
             if (memeModel.Id == 0)
             {
                 memeModel.CreatedBy = User.Identity.GetUserName();
-                memeModel.Minus = 0;
                 memeModel.Plus = 0;
                 memeModel.AddedDate = DateTime.Now;
                 _context.MemeModels.Add(memeModel);

@@ -4,10 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using MemesProject.Dto;
 using MemesProject.Models;
 
 namespace MemesProject.Controllers.Api
 {
+    [Authorize(Roles = RoleName.AdminRole)]
     public class MemesController : ApiController
     {
         private ApplicationDbContext _context;
@@ -22,6 +25,7 @@ namespace MemesProject.Controllers.Api
             _context.Dispose();
         }
 
+        [HttpGet]
         public IHttpActionResult Get()
         {
             var memesInDb = _context.MemeModels.ToList();
@@ -29,6 +33,7 @@ namespace MemesProject.Controllers.Api
             return Ok(memesInDb);
         }
 
+        [HttpGet]
         public IHttpActionResult Get(int id)
         {
             var memesInDb = _context.MemeModels.SingleOrDefault(c => c.Id == id);
@@ -39,7 +44,6 @@ namespace MemesProject.Controllers.Api
             return Ok(memesInDb);
         }
 
-        [Authorize]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
@@ -53,6 +57,40 @@ namespace MemesProject.Controllers.Api
             _context.MemeModels.Remove(memesInDb);
             _context.SaveChanges();
             //Ogarnac zeby nie usuwac tego w Details bo wywala blad
+            return Ok();
+        }
+
+        [HttpPost]
+        public IHttpActionResult Create(MemeDto memeDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var memeToDb = Mapper.Map<MemeDto, MemeModel>(memeDto);
+            _context.MemeModels.Add(memeToDb);
+            _context.SaveChanges();
+
+            return Created(new Uri(Request.RequestUri + "/" + memeToDb.Id), memeDto);
+        }
+
+        public IHttpActionResult Put(int id, MemeDto memeDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var memeInDb = _context.MemeModels.ToList().SingleOrDefault(m => m.Id == id);
+
+            if (memeInDb == null)
+            {
+                return NotFound();
+            }
+
+            Mapper.Map(memeDto, memeInDb);
+            _context.SaveChanges();
             return Ok();
         }
     }

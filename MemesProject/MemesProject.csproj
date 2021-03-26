@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Dto\MemeDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,6 +247,10 @@
     <Compile Include="Migrations\202103251458338_addLikeModel.cs" />
     <Compile Include="Migrations\202103251458338_addLikeModel.Designer.cs">
       <DependentUpon>202103251458338_addLikeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103261253334_DeleteMinusSection.cs" />
+    <Compile Include="Migrations\202103261253334_DeleteMinusSection.designer.cs">
+      <DependentUpon>202103261253334_DeleteMinusSection.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -385,6 +390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103251458338_addLikeModel.resx">
       <DependentUpon>202103251458338_addLikeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103261253334_DeleteMinusSection.resx">
+      <DependentUpon>202103261253334_DeleteMinusSection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
