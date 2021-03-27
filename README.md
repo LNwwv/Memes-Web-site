@@ -5,7 +5,7 @@ Memes WS is a project where you can add your favorite meme, you can also like an
 
 ## Features
 
-- Add your meme to database
+- Add meme to database
 - Like memes
 - Comments other memes
 - Create your account or login via Facebook
