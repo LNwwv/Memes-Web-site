@@ -4,29 +4,28 @@
 @{
     ViewBag.Title = "MyMemes";
 }
-<br />
-<div class="container">
-    <br />
-    <br />
-    <div class="col-lg-3">
-    </div>
-    <div class="col-lg-4">
-        <br />
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-    </div>
-    <div class="col-lg-5" id="obokStrony">
-
-    </div>
-</div>
 @if (!Model.Any())
 {
-    <p>We don't have any memes yet.</p>
+    <br/>
+    <i class="center-block">You don't have any memes yet.</i>
 }
 else
 {
+    <br/>
+    <div class="container">
+        <br/>
+        <br/>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-4">
+            <br/>
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+        </div>
+        <div class="col-lg-5" id="obokStrony">
+        </div>
+    </div>
     foreach (var meme in Model)
     {
         // <---- Div do wyśrodkowania
@@ -35,11 +34,11 @@ else
 
         @* meme view *@
         <div class="jumbotron col-lg-7">
-            <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new { id = meme.Id }, null)</h2>
-            <hr />
+            <h2>@Html.ActionLink(meme.Title, "Details", "Meme", new {id = meme.Id}, null)</h2>
+            <hr/>
             <img src="@meme.ImgSource" alt="img src" class="responsive">
-            <br />
-            <hr />
+            <br/>
+            <hr/>
 
             @* Comment and Like *@
             <div>
@@ -50,7 +49,7 @@ else
             @* Created by and Date value*@
             <div>
                 <div class="col-lg-3">
-                    <i class="fa fa-lg fa-cloud-upload"> </i>  by: <strong>@meme.CreatedBy</strong>
+                    <i class="fa fa-lg fa-cloud-upload"> </i> by: <strong>@meme.CreatedBy</strong>
                 </div>
                 <div class="col-lg-5">
 
@@ -67,29 +66,30 @@ else
 
         </div>
     }
-}
-@*<---- Div do wyśrodkowania*@
-<div class="col-lg-3"></div>
-@*Div do wyśrodkowania --->*@
-<div class="col-lg-7">
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @*<---- Div do wyśrodkowania*@
+    <div class="col-lg-3"></div>
+    @*Div do wyśrodkowania --->*@
+    <div class="col-lg-7">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("ShowMyMemes",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-</div>
+        @Html.PagedListPager(Model, page => Url.Action("ShowMyMemes",
+            new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+    </div>
+}
+
 @section scripts
 {
     <script>
-        $(function () {
-            $('.delete').click(function () {
+        $(function() {
+            $('.delete').click(function() {
                 $.ajax({
-                    method: "DELETE",
-                    url: "/api/Memes/" + $(this).data("id")
-                })
-                    .done(function (response) {
+                        method: "DELETE",
+                        url: "/api/Memes/" + $(this).data("id")
+                    })
+                    .done(function(response) {
                         window.location.reload();
                     })
-                    .fail(function (response) {
+                    .fail(function(response) {
                         alert("Error");
                     });
             });
@@ -103,5 +103,3 @@ else
         height: auto;
     }
 </style>
-
-

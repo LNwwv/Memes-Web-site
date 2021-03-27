@@ -98,21 +98,22 @@ else
 
         </div>
     }
+    @*<---- Div do wyśrodkowania*@
+    <div class="col-lg-3"></div>
+    @*Div do wyśrodkowania --->*@
+
+
+    <div class="col-lg-7">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+    </div>
+
 }
 <br/>
 
 
-@*<---- Div do wyśrodkowania*@
-<div class="col-lg-3"></div>
-@*Div do wyśrodkowania --->*@
-
-
-<div class="col-lg-7">
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-    @Html.PagedListPager(Model, page => Url.Action("Index",
-        new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
-</div>
 
 <style>
     .responsive {
