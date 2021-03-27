@@ -340,5 +340,3 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-#ignore Web.Config file
-C:\Users\PC\Desktop\c#\MemesProject\MemesProject\Web.config
