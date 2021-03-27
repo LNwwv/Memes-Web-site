@@ -26,7 +26,7 @@
                 @* Like container to registered User *@
                 <div class="col-lg-2 container">
                     <a href="@Url.Action("Like", "Home", new {id = Model.Id}, null)" class="fa fa-lg fa-thumbs-o-up "></a>
-                    @Model.Plus
+                    @Model.Likes
                 </div>
             }
             else
@@ -34,7 +34,7 @@
                 @* Like container to unregistered User *@
                 <div class="col-lg-2 container">
                     <a href="@Url.Action("Like", "Home", new {id = Model.Id}, null)" class="fa fa-lg fa-thumbs-o-up "></a>
-                    @Model.Plus
+                    @Model.Likes
                 </div>
             }
 

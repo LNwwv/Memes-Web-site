@@ -1,6 +1,6 @@
 ﻿@model MemesProject.Models.MemeModel
-<br />
-<br />
+<br/>
+<br/>
 
 
 @*<---- Div do wyśrodkowania*@
@@ -9,11 +9,11 @@
 
 
 <div class="jumbotron col-lg-7">
-    <h2>@Html.ActionLink(Model.Title, "Details", "Meme", new { id = Model.Id }, null)</h2>
-    <hr />
+    <h2>@Html.ActionLink(Model.Title, "Details", "Meme", new {id = Model.Id}, null)</h2>
+    <hr/>
     <img src="@Model.ImgSource" alt="img src" class="responsive">
-    <br />
-    <hr />
+    <br/>
+    <hr/>
 
     @* Comment and Like *@
     <div>
@@ -21,14 +21,14 @@
         {
             @* Like container to registered User *@
             <div class="col-lg-2 container">
-                <i class="fa fa-thumbs-up"></i> @Model.Plus @Html.ActionLink("Like", "Like", "Home", new { id = Model.Id }, null)
+                <i class="fa fa-thumbs-up"></i> @Model.Likes @Html.ActionLink("Like", "Like", "Home", new {id = Model.Id}, null)
             </div>
         }
         else
         {
             @* Like container to unregistered User *@
             <div class="col-lg-2 container">
-                <i class="fa fa-thumbs-up"></i> @Model.Plus @Html.ActionLink("Like", "Login", "Account", new { id = Model.Id }, null)
+                <i class="fa fa-thumbs-up"></i> @Model.Likes @Html.ActionLink("Like", "Login", "Account", new {id = Model.Id}, null)
             </div>
         }
 

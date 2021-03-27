@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace MemesProject.Models
 {
@@ -18,7 +15,7 @@ namespace MemesProject.Models
         [Required(ErrorMessage = "Please enter URL source")]
         public string ImgSource { get; set; }
         [Range(0, 9999)]
-        public int Plus { get; set; }
+        public int Likes { get; set; }
         
         public string CreatedBy { get; set; }
         public DateTime? AddedDate { get; set; }

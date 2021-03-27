@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using AutoMapper.Mappers;
-using MemesProject.Models;
+﻿using MemesProject.Models;
 using MemesProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using PusherServer;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace MemesProject.Controllers
 {
@@ -66,7 +65,7 @@ namespace MemesProject.Controllers
             if (memeModel.Id == 0)
             {
                 memeModel.CreatedBy = User.Identity.GetUserName();
-                memeModel.Plus = 0;
+                memeModel.Likes = 0;
                 memeModel.AddedDate = DateTime.Now;
                 _context.MemeModels.Add(memeModel);
             }
@@ -80,7 +79,6 @@ namespace MemesProject.Controllers
         [AllowAnonymous]
         public ActionResult RandomMeme()
         {
-            
             var random = _context.MemeModels
                 .OrderBy(c => Guid.NewGuid())
                 .FirstOrDefault();
@@ -106,17 +104,5 @@ namespace MemesProject.Controllers
             ITriggerResult result = await pusher.TriggerAsync("asp_channel", "asp_event", data);
             return Content("ok");
         }
-
-        public ActionResult Category(int id)
-        {
-            var categoryMem = _context.Categories.ToList().SingleOrDefault(m => m.Id == id);
-
-
-
-            return View();
-        }
-        
-
-
     }
 }

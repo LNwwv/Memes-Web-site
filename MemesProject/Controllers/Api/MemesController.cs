@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using AutoMapper;
+﻿using AutoMapper;
 using MemesProject.Dto;
 using MemesProject.Models;
+using System;
+using System.Linq;
+using System.Web.Http;
 
 namespace MemesProject.Controllers.Api
 {
@@ -56,7 +53,6 @@ namespace MemesProject.Controllers.Api
 
             _context.MemeModels.Remove(memesInDb);
             _context.SaveChanges();
-            //Ogarnac zeby nie usuwac tego w Details bo wywala blad
             return Ok();
         }
 

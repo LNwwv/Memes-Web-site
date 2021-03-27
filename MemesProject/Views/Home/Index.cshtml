@@ -69,7 +69,7 @@ else
                 @* Like container for registered User *@
                 <div class="col-lg-2 container">
                     <a href="@Url.Action("Like","Home", new { id = meme.Id }, null)" class="fa fa-lg fa-thumbs-o-up "></a>
-                    @meme.Plus
+                    @meme.Likes
 
                 </div>
                 }
@@ -78,7 +78,7 @@ else
                 @* Like container for unregistered user *@
             <div class="col-lg-2 container">
                 <a href="@Url.Action("Login","Account", new { id = meme.Id }, null)" class="fa fa-lg fa-thumbs-o-up "></a>
-                @meme.Plus
+                @meme.Likes
             </div>
                 }
 

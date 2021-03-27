@@ -259,6 +259,10 @@
     <Compile Include="Migrations\202103261630367_addCategoriesValuetoDb.designer.cs">
       <DependentUpon>202103261630367_addCategoriesValuetoDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103271752401_ChengePlusToLikes.cs" />
+    <Compile Include="Migrations\202103271752401_ChengePlusToLikes.designer.cs">
+      <DependentUpon>202103271752401_ChengePlusToLikes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -405,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103261630367_addCategoriesValuetoDb.resx">
       <DependentUpon>202103261630367_addCategoriesValuetoDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103271752401_ChengePlusToLikes.resx">
+      <DependentUpon>202103271752401_ChengePlusToLikes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

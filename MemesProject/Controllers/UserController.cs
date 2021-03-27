@@ -19,6 +19,7 @@ namespace MemesProject.Controllers
         {
             _context.Dispose();
         }
+
         // GET: User
         public ActionResult Index()
         {
@@ -26,15 +27,14 @@ namespace MemesProject.Controllers
 
             ViewBag.SumOfMemes = _context.MemeModels.Count(m => m.CreatedBy == user);
 
-            ViewBag.SumOfLikes = _context.MemeModels.ToList().Where(m => m.CreatedBy == user).Sum(m => m.Plus);
+            ViewBag.SumOfLikes = _context.MemeModels.ToList().Where(m => m.CreatedBy == user).Sum(m => m.Likes);
 
             ViewBag.SumOfComentary = _context.Comments.Count(m => m.UserId == user);
 
 
-
-
             return View();
         }
+
         public ActionResult ShowMyMemes(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -55,10 +55,9 @@ namespace MemesProject.Controllers
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
+
+
             return View(memesInDb.ToPagedList(pageNumber, pageSize));
         }
-        
-
-        
     }
 }

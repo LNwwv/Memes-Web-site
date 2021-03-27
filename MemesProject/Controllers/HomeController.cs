@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using MemesProject.Models;
+﻿using MemesProject.Models;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace MemesProject.Controllers
 {
@@ -62,12 +57,12 @@ namespace MemesProject.Controllers
             {
                 var likeToDelete =  _context.Likes.ToList().Find(m => m.UserId == userId);
                 _context.Likes.Remove(likeToDelete);
-                memeInDb.Plus -= 1;
+                memeInDb.Likes -= 1;
             }
             else
             {
                 _context.Likes.Add(likeToDb);
-                memeInDb.Plus += 1;
+                memeInDb.Likes += 1;
             }
 
             _context.SaveChanges();
