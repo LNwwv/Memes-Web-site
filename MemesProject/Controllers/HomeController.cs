@@ -28,20 +28,7 @@ namespace MemesProject.Controllers
 
         public ActionResult Index(string currentFilter , int? page)
         {
-            //ViewBag.CurrentSort = sortOrder;
-
             ViewBag.Comments = _context.Comments.ToList().Count;
-
-            //if (searchString != null)
-            //{
-            //    page = 1;
-            //}
-            //else
-            //{
-            //    searchString = currentFilter;
-            //}
-
-            //ViewBag.CurrentFilter = searchString;
 
             var memesInDb = _context.MemeModels.ToList();
             
