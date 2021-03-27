@@ -19,7 +19,6 @@ namespace MemesProject.Models
         public string ImgSource { get; set; }
         [Range(0, 9999)]
         public int Plus { get; set; }
-        public int Minus { get; set; }
         
         public string CreatedBy { get; set; }
         public DateTime? AddedDate { get; set; }
