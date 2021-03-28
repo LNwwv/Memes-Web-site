@@ -25,20 +25,20 @@ Used technologies:
 - Paged List ver 1.17.0.0
 - JS and Ajax
 
-## Installation
+## Live app
 
-To open this project by yourself all you need is Visual Studio 2019.
-Download a code and open MemesProject.sln
+Web site is available here 
 
-When you open a solution all you have to do is open project via your browser.
-![alt text](https://i.imgur.com/oFpfjOU.png)
-Then click Information (Informacje) button to see User and Admin logins
+https://memesproject20210328102703.azurewebsites.net/
 
 ## Web Api
 
 In project is also available Web Api to Get, Post, Put and Delete posts (memes)
 ![alt text](https://i.imgur.com/7hxoIuC.png)
 To open Swagger type on the end of the web site adress "/swagger"
+or via link
+https://memesproject20210328102703.azurewebsites.net/swagger/ui/index
+
 > Note: to use Web Api you should be loged into Admin account
 
 
