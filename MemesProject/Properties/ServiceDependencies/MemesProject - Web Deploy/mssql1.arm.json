@@ -4,18 +4,18 @@
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "MemesProject20210326120440ResourceGroup",
+      "defaultValue": "MyResourceGroup",
       "metadata": {
         "_parameterType": "resourceGroup",
-        "description": "Nazwa grupy zasobów dla zasobu. Zaleca się umieszczanie zasobów w tej samej grupie zasobów, aby ułatwić śledzenie."
+        "description": "Name of the resource group for the resource. It is recommended to put resources under same resource group for better tracking."
       }
     },
     "resourceGroupLocation": {
       "type": "string",
-      "defaultValue": "germanywestcentral",
+      "defaultValue": "francecentral",
       "metadata": {
         "_parameterType": "location",
-        "description": "Lokalizacja grupy zasobów. Grupy zasobów mogą mieć inną lokalizację niż zasoby."
+        "description": "Location of the resource group. Resource groups could have different location than resources."
       }
     },
     "resourceLocation": {
@@ -23,7 +23,7 @@
       "defaultValue": "[parameters('resourceGroupLocation')]",
       "metadata": {
         "_parameterType": "location",
-        "description": "Lokalizacja zasobu. Domyślnie jest używana lokalizacja grupy zasobów, chyba że dostawca zasobów nie jest tam obsługiwany."
+        "description": "Location of the resource. By default use resource group's location, unless the resource provider is not supported there."
       }
     }
   },

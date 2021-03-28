@@ -71,7 +71,7 @@ namespace MemesProject.Models
         public string UserName { get; set; }
 
         [Required]
-        [EmailAddress]
+        [EmailAddress (ErrorMessage = "Adres e-mail ma niepoprawny format")]
         [Display(Name = "Adres e-mail")]
         public string Email { get; set; }
 
