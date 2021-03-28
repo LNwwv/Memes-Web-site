@@ -26,7 +26,7 @@ namespace MemesProject.Controllers
         [AllowAnonymous]
         public ActionResult Details(int id)
         {
-            var memesInDb = _context.MemeModels.ToList().SingleOrDefault(m => m.Id == id);
+            var memesInDb = _context.MemeModels.SingleOrDefault(m => m.Id == id);
 
             if (memesInDb == null)
             {
@@ -41,7 +41,7 @@ namespace MemesProject.Controllers
             var viewModel = new MemeViewModel()
             {
                 MemeModel = new MemeModel(),
-                Categories = _context.Categories.ToList()
+                Categories = _context.Categories
             };
 
             return View("CreateMeme", viewModel);
@@ -56,7 +56,7 @@ namespace MemesProject.Controllers
                 var viewModel = new MemeViewModel()
                 {
                     MemeModel = memeModel,
-                    Categories = _context.Categories.ToList()
+                    Categories = _context.Categories
                 };
 
                 return View("CreateMeme", viewModel);

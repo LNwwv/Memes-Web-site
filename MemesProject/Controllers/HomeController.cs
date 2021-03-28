@@ -23,9 +23,7 @@ namespace MemesProject.Controllers
 
         public ActionResult Index(string currentFilter , int? page)
         {
-            ViewBag.Comments = _context.Comments.ToList().Count;
-
-            var memesInDb = _context.MemeModels.OrderByDescending(m=> m.AddedDate).ToList();
+            var memesInDb = _context.MemeModels.OrderByDescending(m=> m.AddedDate);
             
             // pageSize odpowiada za liczbe elementow widocznych na jednej stronie.
 
@@ -44,7 +42,7 @@ namespace MemesProject.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-            var memeInDb =_context.MemeModels.ToList().Find(m => m.Id == id);
+            var memeInDb =_context.MemeModels.Single(m => m.Id == id);
 
             var likeToDb = new Like
             {
