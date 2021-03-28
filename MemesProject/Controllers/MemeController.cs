@@ -82,6 +82,10 @@ namespace MemesProject.Controllers
             var random = _context.MemeModels
                 .OrderBy(c => Guid.NewGuid())
                 .FirstOrDefault();
+            if (random==null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             return View(random);
         }

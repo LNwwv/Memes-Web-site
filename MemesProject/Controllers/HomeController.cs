@@ -25,7 +25,7 @@ namespace MemesProject.Controllers
         {
             ViewBag.Comments = _context.Comments.ToList().Count;
 
-            var memesInDb = _context.MemeModels.ToList();
+            var memesInDb = _context.MemeModels.OrderByDescending(m=> m.AddedDate).ToList();
             
             // pageSize odpowiada za liczbe elementow widocznych na jednej stronie.
 

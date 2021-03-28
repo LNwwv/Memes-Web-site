@@ -211,58 +211,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202103231246082_FirstMigration.cs" />
-    <Compile Include="Migrations\202103231246082_FirstMigration.Designer.cs">
-      <DependentUpon>202103231246082_FirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103231250582_MemeModelToDb.cs" />
-    <Compile Include="Migrations\202103231250582_MemeModelToDb.Designer.cs">
-      <DependentUpon>202103231250582_MemeModelToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103241126226_OptionalAddedDate.cs" />
-    <Compile Include="Migrations\202103241126226_OptionalAddedDate.Designer.cs">
-      <DependentUpon>202103241126226_OptionalAddedDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103250854418_AddLikeToDb.cs" />
-    <Compile Include="Migrations\202103250854418_AddLikeToDb.Designer.cs">
-      <DependentUpon>202103250854418_AddLikeToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103250900472_AddComments.cs" />
-    <Compile Include="Migrations\202103250900472_AddComments.Designer.cs">
-      <DependentUpon>202103250900472_AddComments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103251102118_NewCommentsModel.cs" />
-    <Compile Include="Migrations\202103251102118_NewCommentsModel.Designer.cs">
-      <DependentUpon>202103251102118_NewCommentsModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103251346432_AddCategroyToDv.cs" />
-    <Compile Include="Migrations\202103251346432_AddCategroyToDv.Designer.cs">
-      <DependentUpon>202103251346432_AddCategroyToDv.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103251350122_AddCategoryToMemeModel.cs" />
-    <Compile Include="Migrations\202103251350122_AddCategoryToMemeModel.Designer.cs">
-      <DependentUpon>202103251350122_AddCategoryToMemeModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103251458338_addLikeModel.cs" />
-    <Compile Include="Migrations\202103251458338_addLikeModel.Designer.cs">
-      <DependentUpon>202103251458338_addLikeModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103261253334_DeleteMinusSection.cs" />
-    <Compile Include="Migrations\202103261253334_DeleteMinusSection.designer.cs">
-      <DependentUpon>202103261253334_DeleteMinusSection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103261626404_EnterMemesToDb.cs" />
-    <Compile Include="Migrations\202103261626404_EnterMemesToDb.designer.cs">
-      <DependentUpon>202103261626404_EnterMemesToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103261630367_addCategoriesValuetoDb.cs" />
-    <Compile Include="Migrations\202103261630367_addCategoriesValuetoDb.designer.cs">
-      <DependentUpon>202103261630367_addCategoriesValuetoDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103271752401_ChengePlusToLikes.cs" />
-    <Compile Include="Migrations\202103271752401_ChengePlusToLikes.designer.cs">
-      <DependentUpon>202103271752401_ChengePlusToLikes.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -300,7 +248,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <None Include="Properties\PublishProfiles\MemesProject - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MemesProject20210328102703 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -372,47 +320,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103231246082_FirstMigration.resx">
-      <DependentUpon>202103231246082_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103231250582_MemeModelToDb.resx">
-      <DependentUpon>202103231250582_MemeModelToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103241126226_OptionalAddedDate.resx">
-      <DependentUpon>202103241126226_OptionalAddedDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103250854418_AddLikeToDb.resx">
-      <DependentUpon>202103250854418_AddLikeToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103250900472_AddComments.resx">
-      <DependentUpon>202103250900472_AddComments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103251102118_NewCommentsModel.resx">
-      <DependentUpon>202103251102118_NewCommentsModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103251346432_AddCategroyToDv.resx">
-      <DependentUpon>202103251346432_AddCategroyToDv.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103251350122_AddCategoryToMemeModel.resx">
-      <DependentUpon>202103251350122_AddCategoryToMemeModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103251458338_addLikeModel.resx">
-      <DependentUpon>202103251458338_addLikeModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103261253334_DeleteMinusSection.resx">
-      <DependentUpon>202103261253334_DeleteMinusSection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103261626404_EnterMemesToDb.resx">
-      <DependentUpon>202103261626404_EnterMemesToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103261630367_addCategoriesValuetoDb.resx">
-      <DependentUpon>202103261630367_addCategoriesValuetoDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103271752401_ChengePlusToLikes.resx">
-      <DependentUpon>202103271752401_ChengePlusToLikes.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
